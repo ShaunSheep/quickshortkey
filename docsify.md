@@ -75,6 +75,24 @@ docsify serve --port 4321
 
 ?>所有插件列表在[这里](https://docsify.js.org/#/awesome)。
 
+## 配置评论
+
+目前使用的是`gittalk`，共遇到俩问题
+
+
+
+!>问题1： `$docsify` is not defined at gitalk.min.js:1
+
+问题原因：docsify实际初始化顺序位于gittalk之后，gittalk引用了一个空的docsify对象
+
+问题解决：移动gittalk脚本的引入位置，将其放在引入docsify脚本之后，并且初始化gittalk的顺序也放在docsify初始化之后。
+
+!>问题2： gittalk Error: Bad credentials.
+
+问题原因：当前页面未向github app授权
+
+问题解决：点击登录按钮，按提示给予github授权即可
+
 ## 配置mermaid流程图
 
 ```js
