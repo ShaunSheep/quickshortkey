@@ -116,7 +116,21 @@ docsify serve --port 4321
           });
     ```
 
-    
+!>问题3：**Error: Not Found**
+
+那一定是你信息没填对，`repo`那里，一定要填仓库名啊~
+
+!>问题4：**Error: Validation Failed**
+
+这里注意，docsify官网没有写出来，其实gitalk官网上提到
+
+```objectivec
+id: location.pathname,      // Ensure uniqueness and length less than 50
+```
+
+!>问题5：**未找到相关的issues进行评论**
+
+这个问题不大，你点击下面，登入一下你的Guthub账户就好了
 
 ## 配置mermaid流程图
 
