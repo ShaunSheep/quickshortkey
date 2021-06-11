@@ -607,10 +607,26 @@ export LESSCHARSET=utf-8
 
 另存为改源文件的编码即可：使用记事本打开->另存为->选择编码设置为Utf-8
 
+# 常见问题
+
+## git协议与http协议的切换
+
+> fatal: unable to access 'https://github.com/ShaunSheep/xx.git/': OpenSSL SSL_read: Connection was reset, errno 10054
+
+问题原因：使用`ssh`形式访问`git`服务器，工程目录下的`.git/config`中的``url``配置了错误的http协议，解决方案改为`git`协议：
+
+```xml
+
+[remote "origin"]
+	url = git@github.com:ShaunSheep/quickshortkey.git
+```
+
+
+
 # 参考
 
 ?><br>
 [^1]: [Git - 关于版本控制](https://www.git-scm.com/book/zh/v2/起步-关于版本控制)  <br>
 [^2]: [Commit message 和 Change log 编写指南](http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html) <br>
 [^3]: [Google gitignore模板](https://github.com/github/gitignore) <br>
- 
+
