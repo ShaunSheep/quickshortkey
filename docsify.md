@@ -91,7 +91,32 @@ docsify serve --port 4321
 
 问题原因：当前页面未向github app授权
 
-问题解决：点击登录按钮，按提示给予github授权即可
+问题解决：
+
+- 方法1：点击登录按钮，按提示给予github授权即可，如果还解决不了尝试方法2
+
+- 方法2：
+
+  - 从GitHub的 [Personal access token](https://github.com/settings/tokens) 页面，点击 [Generate new token](https://github.com/settings/tokens/new) 。
+
+  - Select scopes：必选的选项为`repo`下的`repo:status`、`repo_deployment`和`public_repo`
+
+  - 写到`gittalk`的`accessToken`初始化中,做法可以参考`gittalk`的`demo`的在线源码[^4]
+
+    ```js
+       var gitalk = new Gitalk({
+            clientID: 'e46f6dec7c07145c652c',
+            clientSecret: 'd1a0b627f9b76d21bd3080d1777d0aa0ad55dd83',
+            accessToken: '6a2f4d91a1f188a2089e70c2a7b63628f3e9e664',
+            repo: 'gitalk',
+            owner: 'gitalk',
+            admin: ['booxood', 'mamboer'],
+            id: 'Demo',
+            distractionFreeMode: true
+          });
+    ```
+
+    
 
 ## 配置mermaid流程图
 
@@ -322,3 +347,5 @@ Ciao!
 <br>
 [^3]: [多页文档 (docsify.js.org)](https://docsify.js.org/#/zh-cn/more-pages)
 <br>
+
+[^4]:[Gitalk Demo | Aotu.io「凹凸实验室」](https://gitalk.github.io/)
