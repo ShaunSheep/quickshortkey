@@ -11,9 +11,8 @@
   <meta name="description" content="Description">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple-dark.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.css">
 
 
   <style>
@@ -56,6 +55,7 @@
 
 <body>
   <div id="app">加载中</div>
+  <div id="container" style="width:65%;margin:auto"></div>
   <script src="//cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
   <script>
     var num = 0;
@@ -102,28 +102,40 @@
   </script>
   <!-- Docsify v4 -->
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify-katex@latest/dist/docsify-katex.js"></script>
 
-  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/gitalk.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify-copy-code"></script>
   <script src="//unpkg.com/docsify-count/dist/countable.js"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/docsify-tabs@1"></script>
+  <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+  <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
   <script>
-    const gitalk = new Gitalk({
-      clientID: 'a474921fb540a10e97ca',
-      clientSecret: '04506b673712e07a0126255fe149a61d0c96905f ',
-      repo: 'quickshortkey',
+    const myTheme = {
+      render(state, instance) {
+        const container = document.createElement('div')
+        container.lang = "en-US"
+        container.className = 'gitment-container gitment-root-container'
+        container.appendChild(instance.renderHeader(state, instance))
+        container.appendChild(instance.renderEditor(state, instance))
+        container.appendChild(instance.renderComments(state, instance))
+        container.appendChild(instance.renderFooter(state, instance))
+        return container
+      },
+    }
+    var gitment = new Gitment({
+      id: document.location.href, // 可选。默认为 location.href
       owner: 'ShaunSheep',
-      admin: ['ShaunSheep'],
-      // facebook-like distraction free mode
-      distractionFreeMode: true,
-      id: location.pathname ,
+      repo: 'quickshortkey',
+      theme: myTheme,
+      oauth: {
+        client_id: 'a474921fb540a10e97ca',
+        client_secret: '04506b673712e07a0126255fe149a61d0c96905f',
+      },
     })
+    gitment.render('container')
   </script>
-
 </body>
 
 </html>
