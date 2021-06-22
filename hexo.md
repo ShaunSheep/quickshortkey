@@ -36,8 +36,43 @@
 
 参考2[hexo(next)——每日一言、今日诗词_cloudYun的博客-CSDN博客](https://blog.csdn.net/qq_44036990/article/details/105088198)
 
+# 支持流程图
+参考这个[链接](http://mermaid-js.github.io/mermaid/#/integrations?id=blogs)
+我的网站使用的是该链接下的这个[插件](https://github.com/webappdevelp/hexo-filter-mermaid-diagrams)
+第一步安装：`$ yarn add hexo-filter-mermaid-diagrams`
+第二步配置：
+```java
+# mermaid chart
+mermaid: ## mermaid url https://github.com/knsv/mermaid
+  enable: true  # default true
+  version: "7.1.2" # default v7.1.2
+  options:  # find more api options from https://github.com/knsv/mermaid/blob/master/src/mermaidAPI.js
+    #startOnload: true  // default true
+```
+第三步插入：
+在after_footer.pug插入
+```java
+if theme.mermaid.enable == true
+  script(type='text/javascript', id='maid-script' mermaidoptioins=theme.mermaid.options src='https://unpkg.com/mermaid@'+ theme.mermaid.version + '/dist/mermaid.min.js' + '?v=' + theme.version)
+  script.
+    if (window.mermaid) {
+      var options = JSON.parse(document.getElementById('maid-script').getAttribute('mermaidoptioins'));
+      mermaid.initialize(options);
+    }
 
+```
+在after-footer.ejs插入
+```java
+<% if (theme.mermaid.enable) { %>
+  <script src='https://unpkg.com/mermaid@<%= theme.mermaid.version %>/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+<% } %>
 
+```
 # 支持数学公式显示
 
 默认使用next主题
