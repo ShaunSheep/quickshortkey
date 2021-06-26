@@ -290,9 +290,17 @@ douban:
   timeout: 10000 
 ```
 
+# 常见问题
 
+# 目录点击不跳转，html目录部分无href
 
+[参考](https://convivae.top/posts/hexo-bo-ke-cai-keng/#%E6%96%B9%E6%B3%95-2)进入你项目根目录的 node_modules\hexo-toc\lib\filter.js 中，把 28 行～31 行修改为：
 
-
+```java
+$title.attr('id', id);
+// $title.children('a').remove();
+// $title.html( '<span id="' + id + '">' + $title.html() + '</span>' );
+// $title.removeAttr('id');
+```
 
 
