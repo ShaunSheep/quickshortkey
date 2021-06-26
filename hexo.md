@@ -36,6 +36,60 @@
 
 参考2[hexo(next)——每日一言、今日诗词_cloudYun的博客-CSDN博客](https://blog.csdn.net/qq_44036990/article/details/105088198)
 
+# 支持搜索
+搜索功能使用的local search,插件名为[searchdb](https://github.com/next-theme/hexo-generator-searchdb)
+## 安装过程
+1. 安装  `npm install hexo-generator-searchdb --save`
+2. 配置
+   站点配置
+   ```java
+    search:
+      path: search.xml
+      field: post
+      format: html
+      limit: 10000
+   ```
+   主题配置
+   ```java
+    # Local search
+    local_search:
+      enable: true
+   ```
+?>偶然遇到过一个问题，搜索结果的域名为0.0.0.7.227,特此记录下
+
+第一步查看文章的url是否有问题，看到没有问题
+ search.xml的内容
+  ```java
+  <entry>
+    <title>Android插件化技术选型</title>
+    <url>//2021/01/Android-plug-in-technology-selection/</url>
+    <content type="text"><![CDATA[默认情况下...]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+  </entry>
+  ```
+   - 标题，配置文件显示正常
+   - 文章的url,配置文件显示地址正常，不带域名和IP
+   - 文章主要内容,配置文件显示正常
+第二步查看下插件源代码
+  ```java
+  <?xml version="1.0" encoding="utf-8"?>
+  <search>
+  <% if(posts){ -%>
+  <% posts.slice(0,limit).each(function(post){ -%>
+    <entry>
+      <title><%-: post.title | cdata %></title>
+      <url><%- encodeURIComponent(config.root + post.path) %></url>
+      <content type="text"><%-: raw ? post[raw] : post.content | cdata %></content>
+      ...
+    </entry>
+  <% }) -%>
+  </search>
+  ```
+接着就思考是不是github pages默认增加的前缀了，如果是怎样解决呢？
+答案是修改插件源代码，在url中加入域名前缀
+
 # 支持流程图
 参考这个[链接](http://mermaid-js.github.io/mermaid/#/integrations?id=blogs)
 我的网站使用的是该链接下的这个[插件](https://github.com/webappdevelp/hexo-filter-mermaid-diagrams)

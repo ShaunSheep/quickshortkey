@@ -151,3 +151,9 @@ File->Setting->Editor->Live Templates->click "+" add a group ->click "+" add a t
 
 **解决方法：**C:\Users\{user}\AppData\Roaming\Google\AndroidStudio4.1\plugins 备份后全部粉碎删除，如果无法删除，请重启电脑后尝试删除
 
+## AndroidStudio找不到build目录
+
+1. 选择show options menu
+2. 选择 show excluded files
+
+![image-20210625154729542](http://cdn.yangchaofan.cn/typora/image-20210625154729542.png)
