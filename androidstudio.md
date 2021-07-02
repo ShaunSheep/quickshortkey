@@ -157,3 +157,8 @@ File->Setting->Editor->Live Templates->click "+" add a group ->click "+" add a t
 2. 选择 show excluded files
 
 ![image-20210625154729542](http://cdn.yangchaofan.cn/typora/image-20210625154729542.png)
+
+## AndroidStudio build的日志乱码
+1. 双击shift，搜索Edit Custom VM Option、
+2. 在打开的文件里输入-Dfile.encoding=UTF-8
+3. 重启AndroidStudio
